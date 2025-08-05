@@ -18,11 +18,17 @@ class CustomUserManager(BaseUserManager):
         extra_fields.setdefault("is_superuser", True)
         return self.create_user(email, password, **extra_fields)
     
-class CustomUser(AbstractBaseUser, PermissionError):
+USER_ROLES = (
+    ('admin', 'Admin'),
+    ('client', 'Client'),
+)
+    
+class CustomUser(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(unique=True)
     name = models.CharField(max_length=225)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
+    role = models.CharField(max_length=10, choices=USER_ROLES, default='client')
 
     objects = CustomUserManager()
 
