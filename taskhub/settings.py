@@ -11,9 +11,23 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 from pathlib import Path
+import environ
+
+
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+env_path = Path('/var/www/envs/taskhub.env')
+env_path_dev = BASE_DIR / ".env"
+
+env = environ.Env()
+
+if env_path_dev.exists():
+    env.read_env(env_path_dev)
+else:
+    env.read_env(env_path)
 
 
 # Quick-start development settings - unsuitable for production
