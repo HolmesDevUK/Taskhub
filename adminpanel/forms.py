@@ -6,3 +6,4 @@ class CreateClientForm(forms.ModelForm):
         model = CustomUser
         fields = ["email", "name"]
 
+

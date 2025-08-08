@@ -47,6 +47,8 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'core',
     'accounts',
+    'clients',
+    'adminpanel',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
