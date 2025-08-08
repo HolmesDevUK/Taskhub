@@ -1,10 +1,10 @@
 from django.shortcuts import render
 from django.contrib.auth.views import LoginView
 
-from .forms import ClientLoginForm
+from .forms import LoginForm
 
-class ClientLoginView(LoginView):
-    authentication_form = ClientLoginForm
+class LoginView(LoginView):
+    authentication_form = LoginForm
     template_name = "accounts/login.html"
 
 # Create your views here.
