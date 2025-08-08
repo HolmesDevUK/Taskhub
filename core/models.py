@@ -20,4 +20,4 @@ class Task(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return f"{self.title} - {self.client.email}"
+        return f"{self.title} - {self.client.name} - {self.client.email}"
