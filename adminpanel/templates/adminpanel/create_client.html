@@ -1,1 +1,28 @@
 {% extends "adminpanel/admin_base.html" %}
+
+{% block title %} Create Client | {{block.super}} {% endblock %}
+
+{% block content %} 
+<h1>Create a new client</h1>
+
+<form method="post">
+    {% csrf_token %}
+
+    {{ form.non_field_errors }}
+
+    <div>
+        <label for="{{ form.name.id_for_label }}">Name:</label>
+        {{ form.name }}
+        {{ form.name.errors }}
+    </div>
+
+    <div>
+        <label for="{{ form.email.id_for_label }}">Email:</label>
+        {{ form.email }}
+        {{ form.email.errors }}
+    </div>
+
+    <button type="submit">Create Client</button>
+</form>
+
+{% endblock %}

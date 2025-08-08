@@ -6,6 +6,7 @@ from django.views.generic.edit import CreateView
 from django.urls import reverse_lazy
 from django.core.mail import EmailMessage
 from django.conf import settings
+from django.contrib import messages
 
 from accounts.models import CustomUser
 from .forms import CreateClientForm
@@ -39,6 +40,13 @@ class CreateClientView(LoginRequiredMixin, AdminRequiredMixin, CreateView):
             body=f"Hello {form_name}, an account has been created for you. \n\n Your email is: {form_email} \n Your password is {random_password}. \n\n You will be prompted to change your password on your first login.",
             from_email= settings.EMAIL_DISPLAY,
             to=[form_email],
+        )
+
+        messages.success(
+            self.request,
+            f"Client {form_name} created Successfully!"
+            f"Email: {form_email} | Password: {random_password}"
+            "An email has been sent to the client providing their login details."
         )
 
         email.send()

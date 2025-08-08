@@ -1,9 +1,18 @@
 {% extends "adminpanel/admin_base.html" %}
 
-{% block title %} {% endblock %}
+{% block title %} Dashboard | {{block.super}} {% endblock %}
 
 {% block css_files %} {% endblock %}
 
+
 {% block content %}
+
+    {% if messages %}
+        {% for message in messages %}
+        <div>
+            {{ message }}
+        </div>
+        {% endfor %}
+    {% endif %}
 
 {% endblock %}
