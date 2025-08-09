@@ -4,12 +4,11 @@ from core.mixins import AdminRequiredMixin
 from django.views.generic import ListView
 from django.views.generic.edit import CreateView
 from django.urls import reverse_lazy
-from django.contrib import messages
 
 from accounts.models import CustomUser
 from core.models import Task
 from .forms import CreateClientForm, CreateTaskForm
-from core.utils import temp_password_generator, send_notification
+from core.utils import temp_password_generator, send_notification, success_message
 
 # Create your views here.
 
@@ -41,19 +40,33 @@ class CreateClientView(LoginRequiredMixin, AdminRequiredMixin, CreateView):
             to_email = [form_email],
         )
 
-        messages.success(
+        success_message(
             self.request,
-            f"Client {form_name} created Successfully!"
-            f"Email: {form_email} | Password: {random_password}"
+            f"Client {form_name} created Successfully! \n"
+            f"Email: {form_email} | Password: {random_password} \n"
             "An email has been sent to the client providing their login details."
         )
 
         return super().form_valid(form)
     
 
-    class CreateTaskView(LoginRequiredMixin, AdminRequiredMixin, CreateView):
-        model = Task
-        form_class = CreateTaskForm
-        template_name = 'adminpanel/create_task.html'
-        success_url = reverse_lazy("adminpanel:dashboard")
+class CreateTaskView(LoginRequiredMixin, AdminRequiredMixin, CreateView):
+    model = Task
+    form_class = CreateTaskForm
+    template_name = 'adminpanel/create_task.html'
+    success_url = reverse_lazy("adminpanel:dashboard")
+
+    def form_valid(self, form):
+        form.save()
+
+        form_client = form.cleaned_data["client"]
+        client_email = form_client.email
+        client_name = form_client.name
+
+        send_notification(
+            subject = "New Task",
+            message = f"Hello {client_name}, \n\n There has been a new task asigned to you on your TaskHub account.",
+            to_email = [client_email],
+        )
+
     

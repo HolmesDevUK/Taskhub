@@ -2,6 +2,7 @@ import secrets
 import string
 from django.core.mail import EmailMessage
 from django.conf import settings
+from django.contrib import messages
 
 def temp_password_generator(length=10):
     chars = string.ascii_letters + string.digits
@@ -17,3 +18,6 @@ def send_notification(subject, message, to_email):
         )
     
     email.send()
+
+def success_message(request, message):
+    messages.success(request, message)
