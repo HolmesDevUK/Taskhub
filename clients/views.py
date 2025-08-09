@@ -10,3 +10,7 @@ from core.models import Task
 class DashboardView(LoginRequiredMixin, ClientRequiredMixin, ListView):
     model = Task
     template_name = "clients/dashboard.html"
+    context_object_name = "tasks"
+
+    def get_queryset(self):
+        return Task.objects.filter(client=self.request.user)

@@ -6,4 +6,38 @@
 
 {% block content %}
 
+<h1>Hello {{ tasks.client.name }}</h1>
+
+<div>
+    {% for task in tasks %}
+
+        <div>
+            <h2>{{ task.title }}</h2>
+        </div>
+
+        <div>
+            <p>{{ tasks.description }}</p>
+        </div>
+
+        <div>
+            <p>Task Status: {{ tasks.status }}</p>
+        </div>
+
+        {% if tasks.file %}
+            <div>
+                {{ tasks.file }}
+            </div>
+        {% endif %}
+
+        <div>
+            <p>created at: {{ tasks.created_at }}</p>
+        </div>
+
+        <div>
+            <p>updated at: {{ tasks.updated_at }}</p>
+        </div>
+
+    {% endfor %}
+</div>
+
 {% endblock %}
