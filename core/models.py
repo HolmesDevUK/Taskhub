@@ -11,8 +11,8 @@ class Task(models.Model):
     ]
 
     title = models.CharField(max_length=255)
-    decription = models.TextField()
-    client = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, limit_choices_to={"role": "client"})
+    description = models.TextField()
+    client = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, limit_choices_to={"role": "client"}, related_name="tasks")
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default="pending")
     deadline = models.DateTimeField()
     file = models.FileField(upload_to="task_files/", blank=True, null=True)
