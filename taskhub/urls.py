@@ -21,10 +21,10 @@ from django.conf import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path("", include("accounts.urls", "accounts"), namespace = "accounts"),
-    path("", include("core.urls")),
-    path("client/", include("clients.urls")),
-    path("adminpanel/", include("adminpanel.urls"))
+    path("", include(("accounts.urls", "accounts"), namespace = "accounts"), ),
+    path("", include(("core.urls", "core"), namespace = "core"), ),
+    path("client/", include(('clients.urls', 'client'), namespace='client'), ),
+    path("adminpanel/", include(("adminpanel.urls", "adminpanel"), namespace = "adminpanel"), )
 ] 
 
 if settings.DEBUG:

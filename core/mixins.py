@@ -14,4 +14,4 @@ class ClientRequiredMixin(RoleRequiredMixin):
     required_role = "client"
     
 class AdminRequiredMixin(RoleRequiredMixin):
-    required_role = "client"
+    required_role = "admin"
