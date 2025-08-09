@@ -8,24 +8,9 @@
 <form method="post">
     {% csrf_token %}
 
-    {% if form.non_field_errors %}
-        <div>{{ form.non_field_errors }}</div>
-    {% endif %}    
-
-    {% for field in form %}
-        <div>
-            {{ field.label_tag }}
-            {{ field }}
-
-            {% if field.errors %}
-                <div>{{ field.errors }}</div>
-            {% endif %}
-
-        </div>
-    {% endfor %}
+    {% include "core/includes/form.html" %}
 
     <button type="submit">Create Task</button>
 </form>
-
 
 {% endblock %}
