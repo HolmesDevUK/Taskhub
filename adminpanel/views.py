@@ -10,6 +10,7 @@ from django.contrib import messages
 
 from accounts.models import CustomUser
 from .forms import CreateClientForm
+from core.utils import temp_password_generator
 
 # Create your views here.
 
@@ -28,7 +29,7 @@ class CreateClientView(LoginRequiredMixin, AdminRequiredMixin, CreateView):
         user.role = 'client'
         user.first_login = True
 
-        random_password = CustomUser.objects.make_random_password()
+        random_password = temp_password_generator()
         user.set_password(random_password)
         user.save()
 
