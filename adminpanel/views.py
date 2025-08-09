@@ -69,4 +69,14 @@ class CreateTaskView(LoginRequiredMixin, AdminRequiredMixin, CreateView):
             to_email = [client_email],
         )
 
+        form_task = form.cleaned_data["title"]
+
+        success_message(
+            self.request,
+            f"The Task: {form_task} has been successfully created and asigned to {client_name} \n"
+            "They have been notified of this."
+        )
+
+        return super().form_valid(form)
+
     
