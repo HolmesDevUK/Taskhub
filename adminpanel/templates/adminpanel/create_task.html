@@ -1,0 +1,31 @@
+{% extends "adminpanel/admin_base.html" %}
+
+{% block title %} Create Task | {{block.super}} {% endblock %}
+
+{% block content %} 
+<h1>Create a new Task</h1>
+
+<form method="post">
+    {% csrf_token %}
+
+    {% if form.non_field_errors %}
+        <div>{{ form.non_field_errors }}</div>
+    {% endif %}    
+
+    {% for field in form %}
+        <div>
+            {{ field.label_tag }}
+            {{ field }}
+
+            {% if field.errors %}
+                <div>{{ field.errors }}</div>
+            {% endif %}
+
+        </div>
+    {% endfor %}
+
+    <button type="submit">Create Task</button>
+</form>
+
+
+{% endblock %}

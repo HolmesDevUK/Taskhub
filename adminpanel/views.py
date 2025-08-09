@@ -7,7 +7,8 @@ from django.urls import reverse_lazy
 from django.contrib import messages
 
 from accounts.models import CustomUser
-from .forms import CreateClientForm
+from core.models import Task
+from .forms import CreateClientForm, CreateTaskForm
 from core.utils import temp_password_generator, send_notification
 
 # Create your views here.
@@ -48,4 +49,11 @@ class CreateClientView(LoginRequiredMixin, AdminRequiredMixin, CreateView):
         )
 
         return super().form_valid(form)
+    
+
+    class CreateTaskView(LoginRequiredMixin, AdminRequiredMixin, CreateView):
+        model = Task
+        form_class = CreateTaskForm
+        template_name = 'adminpanel/create_task.html'
+        success_url = reverse_lazy("adminpanel:dashboard")
     
