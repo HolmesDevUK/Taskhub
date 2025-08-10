@@ -15,4 +15,33 @@
         {% endfor %}
     {% endif %}
 
+    <h1>Admin Panel</h1>
+
+    <div>
+        {% for client in clients %}
+            <div>
+
+                <h2>{{ client.name}}</h2>
+
+                <div>
+                    <h3>Tasks</h3>
+
+                    {% for task in client.tasks.all %}
+
+                        <div>
+                            <p>{{ task.title }}</p>
+                        </div>
+
+                    {% empty %}
+
+                        <p>This client currently has no Tasks asigned.</p>
+
+                    {% endfor %}
+
+                </div>
+
+            </div>
+        {% endfor %}
+    </div>
+
 {% endblock %}

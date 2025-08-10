@@ -15,6 +15,10 @@ from core.utils import temp_password_generator, send_notification, success_messa
 class DashboardView(LoginRequiredMixin, AdminRequiredMixin, ListView):
     model = CustomUser
     template_name = "adminpanel/dashboard.html"
+    context_object_name = "clients"
+
+    def get_queryset(self):
+        return CustomUser.objects.filter(role = "client").prefetch_related("tasks")
 
 class CreateClientView(LoginRequiredMixin, AdminRequiredMixin, CreateView):
     model = CustomUser
