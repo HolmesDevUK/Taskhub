@@ -11,6 +11,10 @@
     {% block css_files %} {% endblock %}
 </head>
 <body>
+    <form method="post" action="{% url 'accounts:logout' %}">
+        {% csrf_token %}
+        <button type="submit">Logout</button>
+    </form>
     {% block header %} {% endblock %}
 <main>
     {% block content %}
