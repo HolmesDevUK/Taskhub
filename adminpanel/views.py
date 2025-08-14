@@ -19,6 +19,11 @@ class DashboardView(LoginRequiredMixin, AdminRequiredMixin, ListView):
 
     def get_queryset(self):
         return CustomUser.objects.filter(role = "client").prefetch_related("tasks")
+    
+    def get(self, request, *args, **kwargs):
+        success_message(request, "Page loaded successfully!")
+        return super().get(request, *args, **kwargs)
+
 
 class CreateClientView(LoginRequiredMixin, AdminRequiredMixin, CreateView):
     model = CustomUser
